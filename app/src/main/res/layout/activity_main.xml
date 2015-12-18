@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/mainRelativeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <GridLayout
+            android:id="@+id/mainGridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="0dp"
+            android:columnCount="9"
+            android:padding="0dp"
+            android:rowCount="9">
+
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/main_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mainGridLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="3dp"
+            android:text="@string/main_textview_string"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/entryButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/main_textview"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

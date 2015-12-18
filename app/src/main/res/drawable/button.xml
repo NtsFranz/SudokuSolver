@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:app="http://schemas.android.com/apk/com.franzco.sudoku">
+    <item android:drawable="@color/DarkGray"
+          android:state_pressed="true"/> <!-- pressed -->
+    <item android:drawable="@color/DarkBlue"
+          android:state_focused="true"/> <!-- focused -->
+    <item android:drawable="@color/Green"
+          app:state_highlighted="true"/> <!-- highlighted -->
+    <item android:drawable="@color/DarkGray"
+          android:state_hovered="true"/> <!-- hovered -->
+    <item android:drawable="@color/Gray"/> <!-- default -->
+</selector>
