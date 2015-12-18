@@ -2,6 +2,8 @@ package SudokuGrid;
 
 /**
  * Created by Nts on 12/16/2015.
+ * A Sudoku grid that can be created and accessed
+ * Sizes other than 9x9 are not yet supported
  */
 public class SudokuGrid {
 	private int gridSize;
@@ -34,7 +36,7 @@ public class SudokuGrid {
 	}
 
 	public boolean getGridPositionPermanent(int position) {
-		if (permanenceGrid[position / gridSize][position % gridSize] == true) {
+		if (permanenceGrid[position / gridSize][position % gridSize]) {
 			return true;
 		} else
 			return false;

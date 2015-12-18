@@ -6,6 +6,8 @@ import android.widget.Button;
 
 /**
  * Created by ntslu on 12/17/2015.
+ * A version of Button that has additional states for use in Sudoku
+ * unfinished
  */
 public class GridButton extends Button {
 

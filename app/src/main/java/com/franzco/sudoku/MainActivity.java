@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 	TextView attemptCounterTextView;
 	GridLayout mainGridLayout;
 	LinearLayout entryButtonLayout;
+	Button clearGridItemButton;
 	GridLayout currentGridLayout;
 	TextView currentSquare;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 		mainGridLayout = (GridLayout) findViewById(R.id.mainGridLayout);
 		// find the number button layout
 		entryButtonLayout = (LinearLayout) findViewById(R.id.entryButtonLayout);
+		// find the clear grid item button
+		clearGridItemButton = (Button) findViewById(R.id.clearGridItemButton);
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// create the grid object
 		sudokuGrid = new SudokuGrid(gridSize);
-		printGrid(sudokuGrid);
+		printGrid();
 	}
 
 	private void createButtonGrid(DisplayMetrics metrics) {
@@ -95,11 +98,12 @@ public class MainActivity extends AppCompatActivity {
 				break;
 			case R.id.action_generate:
 				sudokuGrid.solve();
-				printGrid(sudokuGrid);
+				activeGridIndex = -1;
+				printGrid();
 				break;
 			case R.id.action_reset:
 				sudokuGrid.makeEmptyGrid();
-				printGrid(sudokuGrid);
+				printGrid();
 				break;
 			default:
 				break;
@@ -107,22 +111,27 @@ public class MainActivity extends AppCompatActivity {
 		return true;
 	}
 
-	private void printGrid(SudokuGrid sudokuGrid) {
+	private void printGrid() {
 
 		for (int i = 0; i < gridSize * gridSize; i++) {
-			gridButtons[i].setText("" + sudokuGrid.getGridNumberPosition(i));
-			if (sudokuGrid.getGridPositionPermanent(i)) {
-				gridButtons[i].setBackgroundColor(Color.LTGRAY);
-			} else {
-				gridButtons[i].setBackgroundColor(Color.GRAY);
-			}
+			printGridItem(i);
+		}
+	}
+
+	private void printGridItem(int i)
+	{
+		gridButtons[i].setText("" + sudokuGrid.getGridNumberPosition(i));
+		if (sudokuGrid.getGridPositionPermanent(i)) {
+			gridButtons[i].setBackgroundColor(Color.DKGRAY);
+		} else {
+			gridButtons[i].setBackgroundColor(Color.GRAY);
 		}
 	}
 
 	private void highlightNumber(int number, boolean enable) {
 		for (int i = 0; i < gridSize * gridSize; i++) {
 			if (!enable) {
-				gridButtons[i].setBackgroundColor(Color.GRAY);
+				printGridItem(i);
 				if (i < gridSize)
 					numberButtons[i].setBackgroundColor(Color.GRAY);
 				highlightedNumber = 0;
@@ -132,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 					numberButtons[i].setBackgroundColor(Color.GREEN);
 				highlightedNumber = number;
 			} else {
-				gridButtons[i].setBackgroundColor(Color.GRAY);
+				printGridItem(i);
 				if (i < gridSize)
 					numberButtons[i].setBackgroundColor(Color.GRAY);
 			}
@@ -140,11 +149,16 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void sudokuButtonClicked(View v) {
-		Toast.makeText(this, "Button pressed", Toast.LENGTH_SHORT).show();
 		for (int i = 0; i < gridSize * gridSize; i++) {
 			if (v.equals(gridButtons[i])) {
 				activeGridIndex = i;
 				v.setBackgroundColor(Color.DKGRAY);
+			}
+			else if (i<gridSize)
+			{
+				numberButtons[i].setBackgroundColor(Color.GRAY);
+			} else {
+				printGridItem(i);
 			}
 		}
 	}
@@ -155,12 +169,21 @@ public class MainActivity extends AppCompatActivity {
 
 		if (activeGridIndex != -1) {
 			sudokuGrid.setGridNumberPosition(activeGridIndex, number, true);
-			printGrid(sudokuGrid);
+			printGrid();
 			activeGridIndex = -1;
 		} else if (highlightedNumber != number) {
 			highlightNumber(number, true);
 		} else {
 			highlightNumber(number, false);
+		}
+	}
+
+	public void clearGridItemButtonClicked(View v) {
+		if (activeGridIndex != -1)
+		{
+			sudokuGrid.setGridNumberPosition(activeGridIndex, 0, false);
+			printGrid();
+			activeGridIndex = -1;
 		}
 	}
 }
