@@ -17,6 +17,7 @@
             android:layout_margin="0dp"
             android:columnCount="9"
             android:padding="0dp"
+
             android:rowCount="9">
 
         </GridLayout>
@@ -30,6 +31,11 @@
             android:layout_margin="3dp"
             android:text="@string/main_textview_string"
             android:textSize="20sp"/>
+
+        <com.franzco.sudokusolver.SudokuGridButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view" />
 
         <LinearLayout
             android:id="@+id/entryButtonLayout"

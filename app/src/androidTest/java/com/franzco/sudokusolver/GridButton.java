@@ -1,4 +1,4 @@
-package com.franzco.sudoku;
+package com.franzco.sudokusolver;
 
 import android.content.Context;
 import android.util.AttributeSet;

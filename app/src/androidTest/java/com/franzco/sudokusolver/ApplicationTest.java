@@ -1,4 +1,4 @@
-package com.franzco.sudoku;
+package com.franzco.sudokusolver;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

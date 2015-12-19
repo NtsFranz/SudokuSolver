@@ -1,4 +1,4 @@
-package com.franzco.sudoku;
+package com.franzco.sudokusolver;
 
 import android.graphics.Color;
 import android.os.Bundle;
