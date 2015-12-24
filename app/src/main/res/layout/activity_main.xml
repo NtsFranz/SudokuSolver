@@ -32,11 +32,6 @@
             android:text="@string/main_textview_string"
             android:textSize="20sp"/>
 
-        <com.franzco.sudokusolver.SudokuGridButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/view" />
-
         <LinearLayout
             android:id="@+id/entryButtonLayout"
             android:layout_width="match_parent"

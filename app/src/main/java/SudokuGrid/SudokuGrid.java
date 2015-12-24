@@ -36,10 +36,7 @@ public class SudokuGrid {
 	}
 
 	public boolean getGridPositionPermanent(int position) {
-		if (permanenceGrid[position / gridSize][position % gridSize]) {
-			return true;
-		} else
-			return false;
+		return permanenceGrid[position / gridSize][position % gridSize];
 	}
 
 	private boolean gridTest(int position, int insertion) {
