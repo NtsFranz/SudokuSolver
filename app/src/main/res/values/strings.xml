@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sudoku</string>
+    <string name="app_name">Sudoku Solver</string>
 
     <string name="main_textview_string">Tap Generate to create a solved Sudoku grid.</string>
     <string name="attemptCounter_textview_string">The number of attempts reversals the algorithm went through to create a perfect grid will appear at the bottom.</string>

@@ -32,15 +32,11 @@
             android:text="@string/main_textview_string"
             android:textSize="20sp"/>
 
-        <com.franzco.sudokusolver.SudokuGridButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <LinearLayout
             android:id="@+id/entryButtonLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/main_textview"
+            android:layout_below="@id/main_textview"
             android:orientation="horizontal">
         </LinearLayout>
 
@@ -52,6 +48,13 @@
             android:id="@+id/clearGridItemButton"
             android:text="@string/button_clear_grid_item"
             android:onClick="clearGridItemButtonClicked"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/attemptCounter_textview_string"
+            android:id="@+id/attemptCounterTextView"
+            android:layout_below="@id/clearGridItemButton" />
 
     </RelativeLayout>
 

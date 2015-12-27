@@ -1,6 +1,5 @@
 package com.franzco.sudokusolver;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -27,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
 	TextView currentSquare;
 
 	private int gridSize = 9;
-	private Button[] gridButtons;
-	private Button[] numberButtons;
+	private SudokuGridButton[] gridButtons;
+	private SudokuGridButton[] entryButtons;
 	private SudokuGrid sudokuGrid;
 	private int activeGridIndex = -1;
 	private int highlightedNumber = 0;
@@ -57,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void createButtonGrid(DisplayMetrics metrics) {
-		gridButtons = new Button[gridSize * gridSize];
+		gridButtons = new SudokuGridButton[gridSize * gridSize];
 		for (int i = 0; i < gridSize * gridSize; i++) {
-			gridButtons[i] = (Button) LayoutInflater.from(this).inflate(R.layout.sudoku_button, null);
+			gridButtons[i] = (SudokuGridButton) LayoutInflater.from(this).inflate(R.layout.sudoku_button, null);
 			gridButtons[i].setWidth(metrics.widthPixels / gridSize);
 			gridButtons[i].setHeight(metrics.widthPixels / gridSize);
 
@@ -68,18 +67,18 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void createNumberButtonRow(DisplayMetrics metrics) {
-		numberButtons = new Button[gridSize];
+		entryButtons = new SudokuGridButton[gridSize];
 		for (int i = 0; i < gridSize; i++) {
 			// add the button to the array
-			numberButtons[i] = (Button) LayoutInflater.from(this).inflate(R.layout.entry_button, null);
+			entryButtons[i] = (SudokuGridButton) LayoutInflater.from(this).inflate(R.layout.entry_button, null);
 			// set the size of the buttons
-			numberButtons[i].setWidth(metrics.widthPixels / gridSize);
-			numberButtons[i].setHeight(metrics.widthPixels / gridSize);
+			entryButtons[i].setWidth(metrics.widthPixels / gridSize);
+			entryButtons[i].setHeight(metrics.widthPixels / gridSize);
 			// set the text of the buttons
-			numberButtons[i].setText("" + (i + 1));
+			entryButtons[i].setText("" + (i + 1));
 
 			// add the button to the layout
-			entryButtonLayout.addView(numberButtons[i]);
+			entryButtonLayout.addView(entryButtons[i]);
 		}
 	}
 
@@ -111,6 +110,21 @@ public class MainActivity extends AppCompatActivity {
 		return true;
 	}
 
+	private void printEntryButtons()
+	{
+		for (int i = 0; i< gridSize; i++) {
+			printEntryButton(i);
+		}
+	}
+
+	private void printEntryButton(int i)
+	{
+		if (highlightedNumber == 0)
+		{
+			entryButtons[i].setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+		}
+	}
+
 	private void printGrid() {
 
 		for (int i = 0; i < gridSize * gridSize; i++) {
@@ -122,9 +136,11 @@ public class MainActivity extends AppCompatActivity {
 	{
 		gridButtons[i].setText("" + sudokuGrid.getGridNumberPosition(i));
 		if (sudokuGrid.getGridPositionPermanent(i)) {
-			gridButtons[i].setBackgroundColor(getResources().getColor(R.color.activeButtonColor));
+			gridButtons[i].setBackgroundColor(getResources().getColor(R.color.Black));
+			gridButtons[i].setTextColor(getResources().getColor(R.color.WhiteSmoke));
 		} else {
 			gridButtons[i].setBackgroundColor(getResources().getColor(R.color.normalButtonColor));
+			gridButtons[i].setTextColor(getResources().getColor(R.color.Black));
 		}
 	}
 
@@ -133,17 +149,17 @@ public class MainActivity extends AppCompatActivity {
 			if (!enable) {
 				printGridItem(i);
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(getResources().getColor(R.color.normalButtonColor));
+					printEntryButton(i);
 				highlightedNumber = 0;
 			} else if ((sudokuGrid.getGridNumberPosition(i) == number)) {
 				gridButtons[i].setBackgroundColor(getResources().getColor(R.color.highlightNumber));
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(getResources().getColor(R.color.highlightNumber));
+					entryButtons[i].setBackgroundColor(getResources().getColor(R.color.highlightNumber));
 				highlightedNumber = number;
 			} else {
 				printGridItem(i);
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(getResources().getColor(R.color.normalButtonColor));
+					printEntryButton(i);
 			}
 		}
 	}
@@ -156,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 			else if (i<gridSize)
 			{
-				numberButtons[i].setBackgroundColor(getResources().getColor(R.color.normalButtonColor));
+				printEntryButton(i);
 			} else {
 				printGridItem(i);
 			}
@@ -164,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void entryButtonClicked(View v) {
-		Button b = (Button) v;
+		SudokuGridButton b = (SudokuGridButton) v;
 		int number = Integer.parseInt("" + b.getText());
 
 		if (activeGridIndex != -1) {

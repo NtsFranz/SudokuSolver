@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
+<com.franzco.sudokusolver.SudokuGridButton xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:background="#7f7f7f"
+        android:background="@color/normalButtonColor"
         android:clickable="true"
         android:minHeight="10dp"
         android:minWidth="10dp"
         android:onClick="sudokuButtonClicked">
-</Button>
+</com.franzco.sudokusolver.SudokuGridButton>
