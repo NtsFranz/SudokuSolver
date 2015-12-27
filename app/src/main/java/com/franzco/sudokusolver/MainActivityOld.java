@@ -1,6 +1,5 @@
 package com.franzco.sudokusolver;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import SudokuGrid.SudokuGrid;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityOld extends AppCompatActivity {
 
 	TextView mainTextView;
 	TextView attemptCounterTextView;

@@ -3,7 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="activeButtonColor">#505050</color>
+    <color name="normalButtonColor">#a0a0a0</color>
+    <color name="activeButtonColor">#808080</color>
     <color name="highlightNumber">#55dd55</color>
 
     // x11 colors
