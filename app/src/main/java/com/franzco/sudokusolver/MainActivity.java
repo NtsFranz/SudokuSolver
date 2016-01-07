@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 		entryButtonLayout = (LinearLayout) findViewById(R.id.entryButtonLayout);
 		// find the clear grid item button
 		clearGridItemButton = (Button) findViewById(R.id.clearGridItemButton);
+		// find the attempt counter text view
+		attemptCounterTextView = (TextView) findViewById(R.id.attemptCounterTextView);
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// create the grid object
 		sudokuGrid = new SudokuGrid(gridSize);
-		printGrid();
+		printGrid(0);
 	}
 
 	private void createButtonGrid(DisplayMetrics metrics) {
@@ -96,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.action_generate:
-				sudokuGrid.solve();
+				int reversals = sudokuGrid.solve();
 				activeGridIndex = -1;
-				printGrid();
+				printGrid(reversals);
 				break;
 			case R.id.action_reset:
 				sudokuGrid.makeEmptyGrid();
-				printGrid();
+				printGrid(0);
 				break;
 			default:
 				break;
@@ -125,8 +127,15 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private void printGrid() {
-
+	private void printGrid(int reversals) {
+		if (reversals != 0)
+		{
+			attemptCounterTextView.setText("" + reversals);
+		}
+		else
+		{
+			attemptCounterTextView.setText(R.string.attemptCounter_textview_string);
+		}
 		for (int i = 0; i < gridSize * gridSize; i++) {
 			printGridItem(i);
 		}
@@ -185,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
 		if (activeGridIndex != -1) {
 			sudokuGrid.setGridNumberPosition(activeGridIndex, number, true);
-			printGrid();
+			printGrid(0);
 			activeGridIndex = -1;
 		} else if (highlightedNumber != number) {
 			highlightNumber(number, true);
@@ -198,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 		if (activeGridIndex != -1)
 		{
 			sudokuGrid.setGridNumberPosition(activeGridIndex, 0, false);
-			printGrid();
+			printGrid(0);
 			activeGridIndex = -1;
 		}
 	}
