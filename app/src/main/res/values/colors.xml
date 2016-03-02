@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="activeButtonColor">#505050</color>
-    <color name="highlightNumber">#55dd55</color>
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <color name="button_normal">#03A9F4</color>
+    <color name="button_pressed">#039BE5</color>
+    <color name="button_active">#00BCD4</color>
+    <color name="button_highlighted">#4CAF50</color>
+    <color name="button_permanent">#1976D2</color>
 
     // x11 colors
     <color name="White">#FFFFFF</color>

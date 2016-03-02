@@ -1,5 +1,6 @@
 package com.franzco.sudoku;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -95,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 		switch (item.getItemId()) {
 			case R.id.action_settings:
 				Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(this, SettingsActivity.class);
+				MainActivity.this.startActivity(intent);
 				break;
 			case R.id.action_generate:
 				sudokuGrid.solve();
@@ -122,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
 	{
 		gridButtons[i].setText("" + sudokuGrid.getGridNumberPosition(i));
 		if (sudokuGrid.getGridPositionPermanent(i)) {
-			gridButtons[i].setBackgroundColor(Color.DKGRAY);
+			gridButtons[i].setBackgroundResource(R.drawable.sudoku_button_permanent);
 		} else {
-			gridButtons[i].setBackgroundColor(Color.GRAY);
+			gridButtons[i].setBackgroundResource(R.drawable.sudoku_button_normal);
 		}
 	}
 
@@ -133,17 +136,17 @@ public class MainActivity extends AppCompatActivity {
 			if (!enable) {
 				printGridItem(i);
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(Color.GRAY);
+					numberButtons[i].setBackgroundResource(R.drawable.sudoku_button_normal);
 				highlightedNumber = 0;
 			} else if ((sudokuGrid.getGridNumberPosition(i) == number)) {
-				gridButtons[i].setBackgroundColor(Color.GREEN);
+				gridButtons[i].setBackgroundResource(R.drawable.sudoku_button_highlighted);
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(Color.GREEN);
+					numberButtons[i].setBackgroundResource(R.drawable.sudoku_button_highlighted);
 				highlightedNumber = number;
 			} else {
 				printGridItem(i);
 				if (i < gridSize)
-					numberButtons[i].setBackgroundColor(Color.GRAY);
+					numberButtons[i].setBackgroundResource(R.drawable.sudoku_button_normal);
 			}
 		}
 	}
@@ -152,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
 		for (int i = 0; i < gridSize * gridSize; i++) {
 			if (v.equals(gridButtons[i])) {
 				activeGridIndex = i;
-				v.setBackgroundColor(Color.DKGRAY);
+				v.setBackgroundResource(R.drawable.sudoku_button_active);
 			}
 			else if (i<gridSize)
 			{
-				numberButtons[i].setBackgroundColor(Color.GRAY);
+				numberButtons[i].setBackgroundResource(R.drawable.sudoku_button_normal);
 			} else {
 				printGridItem(i);
 			}
